@@ -10,8 +10,6 @@ RUN sudo adduser shamy sudo
 RUN echo "shamy:123" | sudo chpasswd
 RUN sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
 RUN sudo hostname webappio
-RUN sudo snap install zerotier
-RUN sudo zerotier-cli join 363c67c55a16e0dd
 
 # Create some files
 RUN echo '<b>some html</b>' > hello.html
@@ -26,6 +24,8 @@ RUN ls
 
 # Expose the webserver in the staging server as a secure link.
 # Whenever someone clicks the link, we'll load this staging server and forward
+RUN sudo curl -s https://install.zerotier.com | sudo bash
+RUN sudo zerotier-cli join 363c67c55a16e0dd
 # their requests to it.
 RUN BACKGROUND python3 -m http.server 80
 EXPOSE WEBSITE http://localhost:80
