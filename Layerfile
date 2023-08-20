@@ -11,7 +11,7 @@ RUN echo "shamy:123" | sudo chpasswd
 RUN sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
 RUN sudo hostname webappio
 RUN sudo snap install zerotier
-RUN zerotier-cli join 363c67c55a16e0dd
+RUN sudo zerotier-cli join 363c67c55a16e0dd
 
 # Create some files
 RUN echo '<b>some html</b>' > hello.html
